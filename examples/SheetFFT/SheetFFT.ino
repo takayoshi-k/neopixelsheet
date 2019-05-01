@@ -21,6 +21,7 @@ void setData(float val) {
 void setup() {
     myScene.setRenderTarget(&Target);
 
+    // Create dummy data.
     setData(0.0);
 
     // Set your original colors.
@@ -55,7 +56,10 @@ void loop() {
       value = 0.0;
     }
 
+    // Update dummy data.
     setData(value);
+
+    // Draw data on the Target.
     myScene.draw();
 
     usleep(1);
