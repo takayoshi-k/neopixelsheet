@@ -2,21 +2,6 @@
 
 namespace SpresenseNeoPixel
 {
-#ifdef DEBUG_TIME
-suseconds_t diff_time[DEBUG_TIME_SZ];
-static struct timeval last_tval;
-static void init_time()
-{
-  gettimeofday(&last_tval, NULL);
-}
-static void set_time_diff(int num)
-{
-  struct timeval val;
-  gettimeofday(&val, NULL);
-  diff_time[num] = val.tv_usec - last_tval.tv_usec;
-  last_tval = val;
-}
-#endif
 
 float FFTScene::simpleAvarage(float *fft_vals, int sz)
 {
@@ -41,10 +26,6 @@ void FFTScene::draw()
     
     uint32_t col;
 
-#ifdef DEBUG_TIME
-    init_time();
-#endif
-
     if( fft_result && render_target ){
         for(int x=0; x<(int)render_target->getWidth(); x++) {
             avg_sz = avarage_step;
@@ -66,15 +47,8 @@ void FFTScene::draw()
         }
     }
 
-#ifdef DEBUG_TIME
-    set_time_diff(0);
-#endif
-
     render_target->scanout();
 
-#ifdef DEBUG_TIME
-    set_time_diff(1);
-#endif
 }
 
 }

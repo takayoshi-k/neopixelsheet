@@ -19,7 +19,6 @@ void setData(float val) {
 }
 
 void setup() {
-  Serial.begin(115200);
     myScene.setRenderTarget(&Target);
 
     setData(0.0);
@@ -31,25 +30,15 @@ void setup() {
 }
 
 void loop() {
-    static int loop_counter = 0;
     static float value = 0.0;
     value += 4.0;
     if (value > 32.0){
       value = 0.0;
-      Serial.print("Loop = ");
-      Serial.print(loop_counter);
-      Serial.print(" diff [0] = ");
-      Serial.print(SpresenseNeoPixel::diff_time[0]);
-      Serial.print(" [1] = ");
-      Serial.println(SpresenseNeoPixel::diff_time[1]);
-      loop_counter = 0;
     }
 
     setData(value);
     myScene.draw();
 
     usleep(1);
-    
-    loop_counter++;
 }
 
