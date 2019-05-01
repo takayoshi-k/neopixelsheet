@@ -17,12 +17,9 @@ float FFTScene::simpleAvarage(float *fft_vals, int sz)
 
 void FFTScene::draw()
 {
-    float fft_avgval;
     int avg_sz;
-    int start_pos = 0;
+    int start_pos;
     int pix_val;
-
-    int pix_quantam = 4;
     
     uint32_t col;
 
@@ -34,10 +31,9 @@ void FFTScene::draw()
                 avg_sz += start_pos;
                 start_pos = 0;
             }
-            fft_avgval = simpleAvarage(&fft_result[start_pos], avg_sz);
-            // pix_val = (int)(fft_avgval * 10); // Bias
-            pix_val = (int)fft_avgval;
-            pix_val = (pix_val + pix_quantam - 1) / pix_quantam;
+
+            pix_val = (int)(simpleAvarage(&fft_result[start_pos], avg_sz) * bias_val); // Bias
+            pix_val = (pix_val + indicator_unit - 1) / indicator_unit;
 
             for(int y=0; y<(int)render_target->getHeight(); y++) {
                 col = ( pix_val > y ) ? pixcol[y] : 0x00000000;
