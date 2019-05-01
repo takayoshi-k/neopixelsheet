@@ -38,10 +38,10 @@ class FFTScene : public Scene<uint32_t> {
 
             // Set default colors.
             setLevelColor(0, 0x00000202); // GRB = 00_80_80 = purple
-            setLevelColor(0, 0x00000003); // GRB = 00_00_80 = blue
-            setLevelColor(0, 0x00030300); // GRB = 80_80_00 = yellow
-            setLevelColor(0, 0x00010300); // GRB = 40_80_00 = orange
-            setLevelColor(0, 0x00000600); // GRB = 00_80_00 = red
+            setLevelColor(1, 0x00000003); // GRB = 00_00_80 = blue
+            setLevelColor(2, 0x00030300); // GRB = 80_80_00 = yellow
+            setLevelColor(3, 0x00010300); // GRB = 40_80_00 = orange
+            setLevelColor(4, 0x00000600); // GRB = 00_80_00 = red
         };
         ~FFTScene() {};
 
