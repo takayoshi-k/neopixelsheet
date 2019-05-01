@@ -11,6 +11,7 @@ class FFTScene : public Scene<uint32_t> {
         static const int   DEFAULT_AVARAGE_STEP   = 8;
         static const int   DEFAULT_INDICATOR_UNIT = 4;
         static const float DEFAULT_BIAS_VALUE     = 1.0;
+        static const int   LEVEL_GROUP_NUM = 5;
 
         int    avarage_step;
         float *fft_result;
@@ -20,6 +21,8 @@ class FFTScene : public Scene<uint32_t> {
 
         uint32_t pixcol[8];
 
+        int level_group[LEVEL_GROUP_NUM];
+
     public:
         FFTScene() : Scene(),
                      avarage_step(DEFAULT_AVARAGE_STEP),
@@ -27,14 +30,22 @@ class FFTScene : public Scene<uint32_t> {
                      bias_val(DEFAULT_BIAS_VALUE),
                      indicator_unit(DEFAULT_INDICATOR_UNIT) {
 
-            pixcol[0] = pixcol[1] = 0x00000202; // GRB = 00_80_80 = purple
-            pixcol[2] = pixcol[3] = 0x00000003; // GRB = 00_00_80 = blue
-            pixcol[4] = pixcol[5] = 0x00030300; // GRB = 80_80_00 = yellow
-            pixcol[6]             = 0x00010300; // GRB = 80_80_00
-            pixcol[7]             = 0x00000600; // GRB = 80_00_00
+            level_group[0] = 2;
+            level_group[1] = 4;
+            level_group[2] = 6;
+            level_group[3] = 7;
+            level_group[4] = 8;
+
+            // Set default colors.
+            setLevelColor(0, 0x00000202); // GRB = 00_80_80 = purple
+            setLevelColor(0, 0x00000003); // GRB = 00_00_80 = blue
+            setLevelColor(0, 0x00030300); // GRB = 80_80_00 = yellow
+            setLevelColor(0, 0x00010300); // GRB = 40_80_00 = orange
+            setLevelColor(0, 0x00000600); // GRB = 00_80_00 = red
         };
         ~FFTScene() {};
 
+        void setLevelColor(int level, uint32_t col);
         void setAvarageStep(int step) { avarage_step = step; };
         void setBias(float val) { bias_val = val; };
         void setIndicatorUnit(float val) { bias_val = val; };

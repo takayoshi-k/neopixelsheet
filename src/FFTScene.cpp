@@ -15,6 +15,17 @@ float FFTScene::simpleAvarage(float *fft_vals, int sz)
     return ttl;
 }
 
+void FFTScene::setLevelColor(int level, uint32_t col)
+{
+    int pos = 0;
+    if (level >= 0 && level < LEVEL_GROUP_NUM) {
+        pos =  (level == 0) ?  0 : level_group[level-1];
+        for( ; pos < level_group[level]; start_pos++){
+            pixcol[pos] = col;
+        }
+    }
+}
+
 void FFTScene::draw()
 {
     int avg_sz;
