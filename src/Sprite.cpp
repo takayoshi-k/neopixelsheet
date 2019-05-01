@@ -1,8 +1,9 @@
-#include "Sprite.h"
+// #include "Sprite.h"
 
 namespace SpresenseNeoPisel
 {
 
+#if 0
 template <typename T> T *Sprite<T>::getPixel(uint32_t x, uint32_t y)
 {
     if( (pixeldata != NULL) && (x >= 0) && (y >= 0) && (x < getWidth()) && (y < getHeight()) ) {
@@ -23,6 +24,7 @@ template <typename T> void Sprite<T>::setPixel(uint32_t x, uint32_t y, uint8_t r
 {
     // Not implemented now... sooner or later...
 }
+#endif
 
 }
 
