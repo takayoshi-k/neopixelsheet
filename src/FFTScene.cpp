@@ -26,6 +26,11 @@ void FFTScene::setLevelColor(int level, uint32_t col)
     }
 }
 
+void FFTScene::clear()
+{
+    render_target->clear(0x00000000);
+}
+
 void FFTScene::draw()
 {
     int avg_sz;

@@ -51,6 +51,7 @@ class FFTScene : public Scene<uint32_t> {
         void setIndicatorUnit(float val) { bias_val = val; };
         void updateFFT(float *result) { fft_result = result; };
         float simpleAvarage(float *fft_vals, int sz);
+        void clear();
 
         void draw();
 };
