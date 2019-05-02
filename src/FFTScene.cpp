@@ -29,6 +29,7 @@ void FFTScene::setLevelColor(int level, uint32_t col)
 void FFTScene::clear()
 {
     render_target->clear(0x00000000);
+    render_target->scanout();
 }
 
 void FFTScene::draw()
@@ -60,7 +61,6 @@ void FFTScene::draw()
     }
 
     render_target->scanout();
-
 }
 
 }
