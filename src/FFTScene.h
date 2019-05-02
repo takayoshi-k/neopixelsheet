@@ -22,13 +22,15 @@ class FFTScene : public Scene<uint32_t> {
         uint32_t pixcol[8];
 
         int level_group[LEVEL_GROUP_NUM];
+        bool isOverride;
 
     public:
         FFTScene() : Scene(),
                      avarage_step(DEFAULT_AVARAGE_STEP),
                      fft_result(NULL),
                      bias_val(DEFAULT_BIAS_VALUE),
-                     indicator_unit(DEFAULT_INDICATOR_UNIT) {
+                     indicator_unit(DEFAULT_INDICATOR_UNIT),
+                     isOverride(true) {
 
             level_group[0] = 2;
             level_group[1] = 4;
@@ -45,6 +47,7 @@ class FFTScene : public Scene<uint32_t> {
         };
         ~FFTScene() {};
 
+        void setOverrideMode(bool enable) { isOverride = enable; };
         void setLevelColor(int level, uint32_t col);
         void setAvarageStep(int step) { avarage_step = step; };
         void setBias(float val) { bias_val = val; };
@@ -53,10 +56,9 @@ class FFTScene : public Scene<uint32_t> {
         float simpleAvarage(float *fft_vals, int sz);
         void clear();
 
-        void draw();
+        void draw(unsigned char withScan = 1);
 };
 
 }
 
 #endif  // __SPR_NEOPIXEL_FFTSCENE_H__
-

@@ -6,14 +6,14 @@ namespace SpresenseNeoPixel
 HappyReiwa::HappyReiwa() : font()
 {
     step = 0;
-    shuku_color[0] = 0x00103000;
-    shuku_color[1] = 0x00184000;
-    shuku_color[2] = 0x00205000;
-    shuku_color[3] = 0x00286000;
-    shuku_color[4] = 0x00307000;
-    shuku_color[5] = 0x00388000;
-    shuku_color[6] = 0x00409000;
-    shuku_color[7] = 0x0048A000;
+    shuku_color[0] = 0x00041400;
+    shuku_color[1] = 0x00061800;
+    shuku_color[2] = 0x00081C00;
+    shuku_color[3] = 0x000A2000;
+    shuku_color[4] = 0x000C2400;
+    shuku_color[5] = 0x000E2800;
+    shuku_color[6] = 0x00102C00;
+    shuku_color[7] = 0x00123000;
 }
 
 void HappyReiwa::draw(RenderTarget<uint32_t> &target)
@@ -28,7 +28,7 @@ void HappyReiwa::draw(RenderTarget<uint32_t> &target)
         for(x=0; x<10; x++){
             pixcol = *font.getPixel(x, y);
             if(pixcol) {
-                pixcol = shuku_color[(y + step) % 8];
+                pixcol = shuku_color[(y + step/2) % 8];
             }
             target.setPixel(x, y, &pixcol);
         }
@@ -37,14 +37,18 @@ void HappyReiwa::draw(RenderTarget<uint32_t> &target)
         for(; x<font.getWidth(); x++){
             pixcol = *font.getPixel(x, y);
             if(pixcol) {
-                pixcol = 0x00101010;
+                if((step/8) >= 8) {
+                    pixcol = 0x00010101 * (16 - (step/8)) + 0x00010101;
+                }else{
+                    pixcol = 0x00010101 * (step/8) + 0x00010101;
+                }
             }
             target.setPixel(x, y, &pixcol);
         }
     }
 
     step++;
-    if(step >= 8) step = 0;
+    if(step >= 8*8*2) step = 0;
 }
 
 }

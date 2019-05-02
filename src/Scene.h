@@ -27,12 +27,14 @@ class Scene {
             return tgt;
         };
 
-        virtual void draw() {
+        virtual void draw(unsigned char withScan = 1) {
             for( DrawableContainer<T> *draw_target = drawables;
                     draw_target != NULL;
                     draw_target = draw_target->getNext() ) {
                 draw_target->draw(*render_target);
             }
+            if(withScan)
+                render_target->scanout();
         };
 };
 

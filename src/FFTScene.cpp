@@ -32,7 +32,7 @@ void FFTScene::clear()
     render_target->scanout();
 }
 
-void FFTScene::draw()
+void FFTScene::draw(unsigned char withScan)
 {
     int avg_sz;
     int start_pos;
@@ -54,14 +54,20 @@ void FFTScene::draw()
 
             for(int y=0; y<(int)render_target->getHeight(); y++) {
                 col = ( pix_val > y ) ? pixcol[y] : 0x00000000;
-                render_target->setPixel(x, y, &col);
+                if(isOverride == true){
+                    render_target->setPixel(x, y, &col);
+                }else{
+                    if(col != 0){
+                        render_target->setPixel(x, y, &col);
+                    }
+                }
             }
 
         }
     }
 
-    render_target->scanout();
+    if(withScan)
+        render_target->scanout();
 }
 
 }
-
