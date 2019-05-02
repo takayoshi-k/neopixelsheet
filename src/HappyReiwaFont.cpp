@@ -1,4 +1,4 @@
-#inclulde "HappyReiwaFont.h"
+#include "HappyReiwaFont.h"
 
 namespace SpresenseNeoPixel
 {

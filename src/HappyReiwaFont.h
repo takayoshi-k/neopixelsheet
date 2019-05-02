@@ -1,11 +1,12 @@
 #ifndef __SPR_NEOPIXEL_HAPPYREIWAFONT_H__
 #define __SPR_NEOPIXEL_HAPPYREIWAFONT_H__
 
+#include "Image.h"
 
 namespace SpresenseNeoPixel
 {
 
-class HappyReiwaFont : Image<uint32_t> {
+class HappyReiwaFont : public Image<uint32_t> {
     private:
         static const uint32_t happy_reiwa_width  = 32;
         static const uint32_t happy_reiwa_height = 8;
@@ -23,7 +24,7 @@ class HappyReiwaFont : Image<uint32_t> {
             }
         };
 
-        void setPixel(uint32_t x, uint32_t y, T *){ /* Nothing to draw */ };
+        void setPixel(uint32_t x, uint32_t y, uint32_t *){ /* Nothing to draw */ };
         void setPixel(uint32_t x, uint32_t y, uint8_t r, uint8_t g, uint8_t b){ /* Nothing to draw */ };
 };
 

@@ -16,30 +16,30 @@ HappyReiwa::HappyReiwa() : font()
     shuku_color[7] = 0x0048A000;
 }
 
-HappyReiwa::draw(RenderTarget<uint32_t> &target)
+void HappyReiwa::draw(RenderTarget<uint32_t> &target)
 {
 
     // currently this implementation is assuming the rendertarget has fixed size 32x8.
-    for(int y=0; y<getHeight(); y++){
-        int x;
+    for(uint32_t y=0; y<font.getHeight(); y++){
+        uint32_t x;
         uint32_t pixcol;
 
         // Charactor "Shuku" will change the color every frame.
         for(x=0; x<10; x++){
-            pixcol = getPixcel(x, y);
+            pixcol = *font.getPixel(x, y);
             if(pixcol) {
                 pixcol = shuku_color[(y + step) % 8];
             }
-            target->setPixel(x, y, pixcol);
+            target.setPixel(x, y, &pixcol);
         }
 
         // Other charactor is as same color.
-        for(; x<getWidth(); x++){
-            pixcol = getPixcel(x, y);
+        for(; x<font.getWidth(); x++){
+            pixcol = *font.getPixel(x, y);
             if(pixcol) {
                 pixcol = 0x00101010;
             }
-            target->setPixel(x, y, pixcol);
+            target.setPixel(x, y, &pixcol);
         }
     }
 

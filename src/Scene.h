@@ -19,7 +19,7 @@ class Scene {
         Scene(): render_target(NULL), drawables(NULL) {};
         virtual ~Scene(void) {};
 
-        void setRenderTarget(RenderTarget<T> tgt) { render_target = &tgt; };
+        void setRenderTarget(RenderTarget<T> &tgt) { render_target = &tgt; };
 
         DrawableContainer<T> *setDrawTarget(DrawableContainer<T> *tgt) {
             if(drawables) drawables->addTail(tgt);
