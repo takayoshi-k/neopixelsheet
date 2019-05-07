@@ -14,12 +14,17 @@ class NeoPixelDrawer {
         uint32_t dout_pin_addr;             /**< File descriptor for use neopixel device file */
         uint32_t gpio_high_regval;
         uint32_t gpio_low_regval;
+        inline void wait_cycles(uint32_t n) { // 4 clocks per cycle
+            __asm volatile (
+                "0:" "subs %[count], 1;"
+                "bne 0b;"
+                : [count] "+r" (n));
+        }
 
     public:
         NeoPixelDrawer(uint8_t pin);
         ~NeoPixelDrawer() {};
 
-        void sendOneBit(int val);
         void show(uint32_t *data, int len);
 };
 

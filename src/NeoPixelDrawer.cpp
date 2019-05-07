@@ -25,29 +25,22 @@ NeoPixelDrawer::NeoPixelDrawer(uint8_t pin) : dout_pin(255), dout_pin_addr(0), g
     usleep(50);
 }
 
-void NeoPixelDrawer::sendOneBit(int val)
-{
-    int i, j;
-    int sel = 1 + (val ? 1 : 0);
-
-    for(i = 0; i < 3; i ++) {
-        if (i < sel) {
-            putreg32(gpio_high_regval, dout_pin_addr);
-        } else {
-            putreg32(gpio_low_regval, dout_pin_addr);
-            for(j = 0; j < 40; j ++){}  // Adjust timing.
-        }
-    }
-}
-
 void NeoPixelDrawer::show(uint32_t *data, int len)
 {
-    uint32_t bitmask;
     for(int i=0; i<len; i++) {
-        bitmask = 0x00800000; // bit[23] to bit[0]
-        while(bitmask) {
-            sendOneBit( (data[i] & bitmask) ? 1 : 0 );
-            bitmask >>= 1;
+        uint32_t val = data[i];
+        for (int j = 23; j >= 0; j--) {
+            if ((val >> j) & 1) {
+                putreg32(gpio_high_regval, dout_pin_addr);
+                wait_cycles(20);
+                putreg32(gpio_low_regval, dout_pin_addr);
+                wait_cycles(2);
+            } else {
+                putreg32(gpio_high_regval, dout_pin_addr);
+                wait_cycles(4);
+                putreg32(gpio_low_regval, dout_pin_addr);
+                wait_cycles(20);
+            }
         }
     }
 }
