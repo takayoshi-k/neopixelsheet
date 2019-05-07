@@ -37,11 +37,15 @@ void HappyReiwa::draw(RenderTarget<uint32_t> &target)
         for(; x<font.getWidth(); x++){
             pixcol = *font.getPixel(x, y);
             if(pixcol) {
+#if 0
                 if((step/8) >= 8) {
                     pixcol = 0x00010101 * (16 - (step/8)) + 0x00010101;
                 }else{
                     pixcol = 0x00010101 * (step/8) + 0x00010101;
                 }
+#else
+                pixcol = 0x00080808;
+#endif
             }
             target.setPixel(x, y, &pixcol);
         }
