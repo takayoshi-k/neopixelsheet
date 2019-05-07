@@ -25,7 +25,7 @@ class Image {
         void clear(T *col) {
             for(uint32_t i=0; i<height; i++){
                 for(uint32_t j=0; j<width; j++){
-                    setPixel(i, j, col);
+                    setPixel(j, i, col);
                 }
             }
         };
@@ -33,7 +33,7 @@ class Image {
         void clear(uint8_t r, uint8_t g, uint8_t b) {
             for(uint32_t i=0; i<height; i++){
                 for(uint32_t j=0; j<width; j++){
-                    setPixel(i, j, r, g, b);
+                    setPixel(j, i, r, g, b);
                 }
             }
         };
