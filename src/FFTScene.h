@@ -7,7 +7,7 @@ namespace SpresenseNeoPixel
 {
 
 class FFTScene : public Scene<uint32_t> {
-    private:
+    protected:
         static const int   DEFAULT_AVARAGE_STEP   = 8;
         static const int   DEFAULT_INDICATOR_UNIT = 4;
         static const float DEFAULT_BIAS_VALUE     = 1.0;
@@ -56,7 +56,7 @@ class FFTScene : public Scene<uint32_t> {
         float simpleAvarage(float *fft_vals, int sz);
         void clear();
 
-        void draw(unsigned char withScan = 1);
+        virtual void draw(unsigned char withScan = 1);
 };
 
 }
