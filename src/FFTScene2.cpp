@@ -29,11 +29,11 @@ void FFTScene2::draw(unsigned char withScan)
                 col = ( pix_val > y ) ? pixcol[y] : 0x00000000;
                 if(isOverride == true){
                     render_target->setPixel(center_pos + x, y, &col);
-                    render_target->setPixel(center_pos - x, y, &col);
+                    render_target->setPixel(center_pos - x - 1, y, &col);
                 }else{
                     if(col != 0){
                         render_target->setPixel(center_pos + x, y, &col);
-                        render_target->setPixel(center_pos - x, y, &col);
+                        render_target->setPixel(center_pos - x - 1, y, &col);
                     }
                 }
             }
